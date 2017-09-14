@@ -154,6 +154,11 @@ class Call
                 'password' => $scope->password,
             ];
         }
+        
+        // Checks whether parameters are set and if so adds them to the uri.
+        if (!empty($scope->url_parameters)){
+            $uri .= '?' . http_build_query($scope->url_parameters);
+        }
 
         // Attempt the actual response that has been built thus far
         try {
