@@ -84,6 +84,11 @@ class Client
      * @var array
      */
     public $fields = [];
+    
+    /**
+     * @var array
+     */
+    public $url_parameters = [];
 
     /**
      * @var int
@@ -294,6 +299,21 @@ class Client
 
         return $this;
     }
+    
+    /**
+     * Specify any parameters that should form part the request uri.
+     *
+     * @param   array $parameters The key=>value's of the parameters to send with
+     *
+     * @return  $this
+     */
+    public function setUrlParameters($parameters = [])
+    {
+
+        $this->url_parameters = array_merge($this->url_parameters, $parameters);
+
+        return $this;
+    }
 
     /**
      * Make a API call using the $method described. This is the final method
@@ -369,6 +389,7 @@ class Client
         // Clear call, raw & fields so a new request is fresh
         $this->call = null;
         $this->fields = [];
+        $this->url_parameters = [];
         $this->raw = false;
     }
 }
